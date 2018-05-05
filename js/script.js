@@ -1,9 +1,10 @@
 
+// add breed options to dropdown menu
 function loadBreed() 
 {
     var all_breeds = 'https://dog.ceo/api/breeds/list/all';
 
-    $.getJSON(all_breeds, function(data)
+    $.getJSON (all_breeds, function(data)
     {
         var breeds = data.message;
 
@@ -25,29 +26,33 @@ function loadBreed()
 
 };
 
-
-function loadImage()
+// load images of selected breed
+function loadImages()
 {
+    // clear grid
+    $('#grid').html(''); 
+
     var selected = $('#breed-selector').val();
     var $title = $('#title');
     $title.text(selected);
 
     var images = 'https://dog.ceo/api/breed/' + selected + '/images';
 
-    $.getJSON(images, function(data)
+    $.getJSON (images, function(data)
     {
         var urls = data.message;
 
-        $.each (urls, function(index, url)
+        for (n = 0; n < data.message.length; n ++)
         {
-            $('#grid').append('<div class="col-md-4"><img src="' + url + '"></div>');
+            // boostrap 4 masonry card gallery
+            $('#grid').append('<div class="card"><img class="card-img" src="' + data.message[n] + '"></div>');            
+        }
 
-        });
     }); 
 
 
 };
 
 
-$('#breed-selector').change(loadImage);
+$('#breed-selector').change(loadImages);
 
