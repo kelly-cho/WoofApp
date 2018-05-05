@@ -19,7 +19,7 @@ img, embed, object, video
 	font-family: 'Gaegu', cursive;
 }
 
-#breed-selector, #breed-selector option
+.form-control, .form-control option
 {
 	text-transform: capitalize;
 }

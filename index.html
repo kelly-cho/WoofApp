@@ -23,8 +23,10 @@
 
 <body>
     <div class="container">
+
         <div class="row">
             <div class="col-md-12">
+
                 <h2 id="title" class="title">What kind of doggo do you need today?</h2>
 
                 <hr>
@@ -38,13 +40,30 @@
         </div>
 
         <br>
+
         <div class="row justify-content-center">
             <div class="col-md-4">
+
                 <select id="breed-selector" class="form-control">
                     <option selected disabled>Select a Breed...</option>
                 </select>
+
             </div>
         </div>
+
+        <br>
+
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+
+                <select id="subbreed-selector" class="form-control">
+                    <option selected disabled>Select a SubBreed...</option>
+                </select>
+
+            </div>
+        </div>
+
+        <br>
 
         <div id="grid" class="card-columns">
             <!-- masonry gallery -->
@@ -62,5 +81,6 @@
 
 
 <script type="text/javascript">
+    $('#subbreed-selector').hide();
     loadBreed();
 </script>
