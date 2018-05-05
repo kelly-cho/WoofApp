@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- JQUERY & JS -->
+    <script src="js/libs/jquery.min.js"></script>
+    <script src="js/script.js"></script>
+
+    <script type="text/javascript">
+        loadBreed();
+    </script>
+
+    <title>Woof!</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 id="title" class="title">What kind of doggo do you need today?</h2>
+
+                <hr>
+
+                <form id="form-container" class="form-container">
+                    <input type="text" id="input" value="">
+                    <button id="submit-btn">Search</button>
+                </form>
+
+            </div>
+        </div>
+
+        <br>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <select id="breed-selector" class="form-control">
+                </select>
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+</html>

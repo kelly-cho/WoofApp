@@ -1,0 +1,26 @@
+/* easy sizing that includes border, padding, content but margin */
+* 
+{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+	text-align: center;
+}
+
+/* ensures that the elements don't overflow */
+img, embed, object, video 
+{
+	max-width: 100%;
+}
+
+.title 
+{
+    color: black;
+}
+
+#breed-selector, #breed-selector option
+{
+	text-transform: capitalize;
+}
+
