@@ -16,7 +16,7 @@ img, embed, object, video
 
 .title 
 {
-    color: black;
+	font-family: 'Gaegu', cursive;
 }
 
 #breed-selector, #breed-selector option
