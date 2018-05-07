@@ -43,8 +43,8 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
 
-                <form class="form-inline" autocomplete="off" id="input" >
-                  <input type="text" class="form-control" id="myInput" placeholder="Enter a Breed...">
+                <form class="form-inline" autocomplete="off" id="search" >
+                  <input type="text" class="form-control" id="input" placeholder="I'm looking for a...">
                   <button type="submit" class="btn btn-primary">Search</button>
                 </form>
 
@@ -83,8 +83,6 @@
 
     </div>
 
-
-
     <script src="js/libs/jquery.min.js"></script>
     <script src="js/script.js"></script>
 
@@ -95,8 +93,6 @@
 <script type="text/javascript">
     $('#subbreed-selector').hide();
     loadBreed();
+    autocomplete(document.getElementById("input"), breedList);
 </script>
 
-<script>
-autocomplete(document.getElementById("myInput"), breedList);
-</script>

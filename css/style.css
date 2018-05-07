@@ -19,6 +19,11 @@ img, embed, object, video
 	color: #595959;
 }
 
+body
+{
+  background-color: #f6e2e2 !important;
+}
+
 .title 
 {
 	font-family: 'Gaegu', cursive;
@@ -37,7 +42,7 @@ img, embed, object, video
   }  
 }
 
-.form-control, .form-control option
+.form-control option
 {
 	text-transform: capitalize;
 }
@@ -51,7 +56,7 @@ img, embed, object, video
 .autocomplete-items 
 {
   text-transform: capitalize;
-  
+
   position: inherit;
   border: 1px solid #595959;
   z-index: 99;
@@ -78,7 +83,7 @@ img, embed, object, video
 .autocomplete-active 
 {
   /* when navigating through the items using the arrow keys */
-  background-color: #f2e1e1 !important; 
+  background-color: #ffc9d3 !important; 
 }
 
 .btn-primary
