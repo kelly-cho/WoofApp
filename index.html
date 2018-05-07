@@ -18,6 +18,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
     <title>Woof!</title>
+    <link rel="icon" href="image/Icon.png">
 
 </head>
 
@@ -26,14 +27,25 @@
 
         <div class="row">
             <div class="col-md-12">
+    
+                <br>
 
-                <h2 id="title" class="title">What kind of doggo do you need today?</h2>
+                <img id="logo" src="image/Logo.png" alt="Woof Logo">
+                <h1 id="title" class="title">Your Daily Dose of Therapeutic Floofiness </h1>
 
-                <hr>
+                <br>
 
-                <form id="form-container" class="form-container">
-                    <input type="text" id="input" value="">
-                    <button id="submit-btn">Search</button>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+
+                <form class="form-inline" autocomplete="off" id="input" >
+                  <input type="text" class="form-control" id="myInput" placeholder="Enter a Breed...">
+                  <button type="submit" class="btn btn-primary">Search</button>
                 </form>
 
             </div>
@@ -83,4 +95,8 @@
 <script type="text/javascript">
     $('#subbreed-selector').hide();
     loadBreed();
+</script>
+
+<script>
+autocomplete(document.getElementById("myInput"), breedList);
 </script>

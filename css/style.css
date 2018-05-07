@@ -14,9 +14,27 @@ img, embed, object, video
 	max-width: 100%;
 }
 
+*
+{
+	color: #595959;
+}
+
 .title 
 {
 	font-family: 'Gaegu', cursive;
+}
+
+#logo
+{
+	width: 50%;
+}
+
+@media (min-width: 576px)
+{
+  .form-inline .form-control
+  {
+    width: 82% !important;
+  }  
 }
 
 .form-control, .form-control option
@@ -24,3 +42,49 @@ img, embed, object, video
 	text-transform: capitalize;
 }
 
+.autocomplete 
+{
+  position: relative;
+  display: inline-block;
+}
+
+.autocomplete-items 
+{
+  text-transform: capitalize;
+  
+  position: inherit;
+  border: 1px solid #595959;
+  z-index: 99;
+  width: 82%;
+
+  /* position the autocomplete items to be the same width as the container */
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+.autocomplete-items div 
+{
+  padding: 10px;
+  cursor: pointer;
+  background-color: #ffffff; 
+}
+
+.autocomplete-items div:hover 
+{
+  /* when hovering an item: */
+  background-color: #e2e2e2; 
+}
+.autocomplete-active 
+{
+  /* when navigating through the items using the arrow keys */
+  background-color: #f2e1e1 !important; 
+}
+
+.btn-primary
+{
+	background-color: #db7689 !important;
+	border-color: #db7689 !important;
+  margin-left: auto;
+  width: 15%;
+}
