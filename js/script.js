@@ -1,10 +1,11 @@
 var breedList = [];
 
-
-// add breed options to dropdown menu
+/* add breed options to dropdown menu */
 function loadBreed() 
 {
-    var all_breeds = 'https://dog.ceo/api/breeds/list/all';
+    $("#subbreed-selector").hide();
+    
+    var all_breeds = "https://dog.ceo/api/breeds/list/all";
 
     $.getJSON (all_breeds, function(data)
     {
@@ -12,92 +13,85 @@ function loadBreed()
 
         $.each (breeds, function(name, subbreed)
         {
-            $('#breed-selector').append('<option>' + name + '</option>');
             breedList.push(name);
         });
     });    
 
+    // set up autocomplete search bar
+    autocomplete(document.getElementById("input"), breedList);
+
 };
 
-// load images of selected breed
-function loadImages()
+/* load images of selected breed */
+function showBreed()
 {
     // clear grid
-    $('#grid').html(''); 
+    $("#grid").html(""); 
 
-    var selected = $('#breed-selector').val();
-    var images = 'https://dog.ceo/api/breed/' + selected + '/images';
+    var selected = $("#input").val();
+    var images = "https://dog.ceo/api/breed/" + selected + "/images";
 
+    // masonry gallery
     $.getJSON (images, function(data)
     {
-        for (var n = 0; n < data.message.length; n ++)
+        for (n = 0; n < data.message.length; n ++)
         {
-            // boostrap 4 masonry card gallery
-            $('#grid').append('<div class="card"><img class="card-img" src="' + data.message[n] + '"></div>');            
+            $("#grid").append("<div class='card'><img class='card-img' src='" + data.message[n] + "'></div>");            
         }
-
     }); 
 
-    checkSubBreed();
 
-};
-
-// check for sub-breed
-function checkSubBreed()
-{
-    var selected = $('#breed-selector').val();    
-
-    var subs = 'https://dog.ceo/api/breed/' + selected + '/list';
+    // check for sub-breed and show filters
+    var subs = "https://dog.ceo/api/breed/" + selected + "/list";
 
     $.getJSON (subs, function(data)
     {
-
         if (data.message.length == 0)
-            $('#subbreed-selector').hide();
+            $("#subbreed-selector").hide();
         else
         {
-            $('#subbreed-selector').html('');
-            $('#subbreed-selector').append('<option selected disabled>Select a SubBreed...</option>');
-            $('#subbreed-selector').show();
+            $("#subbreed-selector").html("");
+            $("#subbreed-selector").append("<option>All Sub-Breeds</option>");
+            $("#subbreed-selector").show();
 
-            for (var n = 0; n < data.message.length; n ++)
+            for (n = 0; n < data.message.length; n ++)
             {
-                $('#subbreed-selector').append('<option>' + data.message[n] + '</option>');
+                $("#subbreed-selector").append("<option>" + data.message[n] + "</option>");
             }
         }
-
     }); 
 
-}
+    return false;
+};
 
-// load images of selected sub-breed
-function loadImagesSub()
+/* load images of selected sub-breed */
+function showSubBreed()
 {
     // clear grid
-    $('#grid').html(''); 
+    $("#grid").html(""); 
 
-    var breed    = $('#breed-selector').val();
-    var subbreed = $('#subbreed-selector').val();
+    var breed    = $("#input").val(); 
+    var subbreed = $("#subbreed-selector").val();
 
-    var images = 'https://dog.ceo/api/breed/' + breed + '/' + subbreed + '/images';
+    var images = "https://dog.ceo/api/breed/" + breed + "/" + subbreed + "/images";
+    
+    if (subbreed == "All Sub-Breed")
+        images = "https://dog.ceo/api/breed/" + breed + "/images";        
 
     $.getJSON (images, function(data)
     {
-        for (var n = 0; n < data.message.length; n ++)
+        for (n = 0; n < data.message.length; n ++)
         {
-            // boostrap 4 masonry card gallery
-            $('#grid').append('<div class="card"><img class="card-img" src="' + data.message[n] + '"></div>');            
+            $("#grid").append("<div class='card'><img class='card-img' src='" + data.message[n] + "'></div>");            
         }
-
     }); 
-
 };
 
-
-// autocomplete search dropdown menu
-// entered: user input, list: breedlist (without sub breed)
+/* autocomplete search dropdown menu */
 function autocomplete (entered, list) 
 {
+    // entered: user input, list: breedlist (without sub breed)
+
     // when users type in the search bar
     entered.addEventListener("input", function(e) 
     {
@@ -110,22 +104,32 @@ function autocomplete (entered, list)
         addItems(this);
     });
 
+    // when users hit enter
+    entered.addEventListener("keyup", function(e)
+    {
+        e.preventDefault();
+
+        if(e.keyCode == 13)
+            document.getElementById("submit").click();
+    });
+
     // add breed option to the list
     function addItems(obj)
     {
         // user input
         var val = obj.value;
+        var divA, divB;
 
         // clear autocompleted list
         closeAllLists();
 
         // create a div for the dropdown list
-        var a = document.createElement("div");
-        a.setAttribute("id", obj.id + "autocomplete-list");
-        a.setAttribute("class", "autocomplete-items");
+        divA = document.createElement("div");
+        divA.setAttribute("id", obj.id + "autocomplete-list");
+        divA.setAttribute("class", "autocomplete-items");
 
         // append the dropdown list to the parent container
-        obj.parentNode.appendChild(a);
+        obj.parentNode.appendChild(divA);
 
         // arrow key focus in the dropdown list
         currentFocus = -1;
@@ -137,26 +141,27 @@ function autocomplete (entered, list)
             if (list[n].substr(0, val.length).toUpperCase() == val.toUpperCase())
             {
                 // create a div element for each breed
-                var b = document.createElement("div");
+                divB = document.createElement("div");
 
                 // make the matching letters bold
-                b.innerHTML = "<strong>" + list[n].substr(0, val.length) + "</strong>";
-                b.innerHTML += list[n].substr(val.length);
+                divB.innerHTML = "<strong>" + list[n].substr(0, val.length) + "</strong>";
+                divB.innerHTML += list[n].substr(val.length);
+                divB.innerHTML += "<input type='hidden' value='" + list[n] + "'>";
 
-                // a input field to hold the breed name
-                b.innerHTML += "<input type='hidden' " + "id='breed" + n + "' value='" + list[n] + "'>";
-
-                a.appendChild(b);
-
-                // when breed name clicked
-                b.addEventListener("click", function(e) 
-                {
-                    entered.value = document.getElementById("breed" + n).value;
-                    closeAllLists();
-                });
-
+                itemOnClicked(divB, list[n]);                
+                divA.appendChild(divB);
             }
         }        
+    }
+
+    // action for clicking on a breed
+    function itemOnClicked(item, name)
+    {
+        item.addEventListener("click", function(e) 
+        {
+            entered.value = name;
+            closeAllLists();
+        });
     }
 
     // keyboard action
@@ -187,7 +192,7 @@ function autocomplete (entered, list)
             
             if (currentFocus > -1) 
             {
-                /*and simulate a click on the "active" item:*/
+                // click on the "active" item
                 if (x)
                     x[currentFocus].click();
             }
@@ -202,9 +207,11 @@ function autocomplete (entered, list)
 
         removeActive(x);
         
-        if (currentFocus >= x.length) currentFocus = 0;
+        if (currentFocus >= x.length)
+            currentFocus = 0;
         
-        if (currentFocus < 0) currentFocus = (x.length - 1);
+        if (currentFocus < 0)
+            currentFocus = (x.length - 1);
         
         // add class "autocomplete-active"
         x[currentFocus].classList.add("autocomplete-active");
@@ -240,15 +247,7 @@ function autocomplete (entered, list)
     });
 }
 
-function test()
-{
-    var $title = $('#title');
-    $title.text("woof");
-
-    return false;  
-}
 
 
-$('#breed-selector').change(loadImages);
-$('#subbreed-selector').change(loadImagesSub);
-$('#search').submit(test);
+$("#search").submit(showBreed);
+$("#subbreed-selector").change(showSubBreed);

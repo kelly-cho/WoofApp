@@ -31,7 +31,7 @@
                 <br>
 
                 <img id="logo" src="image/Logo.png" alt="Woof Logo">
-                <h1 id="title" class="title">Your Daily Dose of Therapeutic Floofiness </h1>
+                <h2 id="title" class="title">Your Daily Dose of Therapeutic Floofiness </h2>
 
                 <br>
 
@@ -44,8 +44,8 @@
             <div class="col-md-6">
 
                 <form class="form-inline" autocomplete="off" id="search" >
-                  <input type="text" class="form-control" id="input" placeholder="I'm looking for a...">
-                  <button type="submit" class="btn btn-primary">Search</button>
+                    <input type="text" class="form-control" id="input" placeholder="I'm looking for a...">
+                    <button type="submit" id="submit" class="btn btn-primary">Search</button>
                 </form>
 
             </div>
@@ -53,23 +53,11 @@
 
         <br>
 
-        <div class="row justify-content-center">
-            <div class="col-md-4">
+        <div class="row justify-content-end">
+            <div class="col-md-2">
 
-                <select id="breed-selector" class="form-control">
-                    <option selected disabled>Select a Breed...</option>
-                </select>
-
-            </div>
-        </div>
-
-        <br>
-
-        <div class="row justify-content-center">
-            <div class="col-md-4">
-
-                <select id="subbreed-selector" class="form-control">
-                    <option selected disabled>Select a SubBreed...</option>
+                <select id="subbreed-selector" class="form-control form-control-sm">
+                    <!-- sub breed options -->
                 </select>
 
             </div>
@@ -91,8 +79,7 @@
 
 
 <script type="text/javascript">
-    $('#subbreed-selector').hide();
     loadBreed();
-    autocomplete(document.getElementById("input"), breedList);
+
 </script>
 

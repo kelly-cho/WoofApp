@@ -1,37 +1,34 @@
 /* easy sizing that includes border, padding, content but margin */
 * 
 {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-ms-box-sizing: border-box;
-	box-sizing: border-box;
-	text-align: center;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  text-align: center;
 }
 
 /* ensures that the elements don't overflow */
 img, embed, object, video 
 {
-	max-width: 100%;
-}
-
-*
-{
-	color: #595959;
+  max-width: 100%;
 }
 
 body
 {
+  color: #595959;  
+  text-align: center;
   background-color: #f6e2e2 !important;
 }
 
 .title 
 {
-	font-family: 'Gaegu', cursive;
+  font-family: 'Gaegu', cursive;
 }
 
 #logo
 {
-	width: 50%;
+  width: 50%;
 }
 
 @media (min-width: 576px)
@@ -42,23 +39,22 @@ body
   }  
 }
 
-.form-control option
+.form-control, .form-control option
 {
-	text-transform: capitalize;
+  text-transform: capitalize;
 }
 
-.autocomplete 
+#subbreed-selector
 {
-  position: relative;
-  display: inline-block;
+  color: white;
+  background-color: #d7b3af;
+  border: 0;
 }
 
 .autocomplete-items 
 {
   text-transform: capitalize;
-
   position: inherit;
-  border: 1px solid #595959;
   z-index: 99;
   width: 82%;
 
@@ -70,26 +66,37 @@ body
 
 .autocomplete-items div 
 {
-  padding: 10px;
+  padding: 2%;
   cursor: pointer;
   background-color: #ffffff; 
 }
 
+/* when hovering over a menu item: */
 .autocomplete-items div:hover 
 {
-  /* when hovering an item: */
   background-color: #e2e2e2; 
 }
+
+/* when navigating through the items using the arrow keys */
 .autocomplete-active 
 {
-  /* when navigating through the items using the arrow keys */
   background-color: #ffc9d3 !important; 
 }
 
 .btn-primary
 {
-	background-color: #db7689 !important;
-	border-color: #db7689 !important;
+  background-color: #db7689 !important;
+  border-color: #db7689 !important;
   margin-left: auto;
-  width: 15%;
 }
+
+
+@media (max-width: 576px)
+{
+  .btn-primary
+  {
+    width: 100%;
+    margin-top: 3%;
+  }
+}
+
