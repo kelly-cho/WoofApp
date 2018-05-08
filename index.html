@@ -9,6 +9,7 @@
     
     <!-- CSS & FONTS -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">    
     <link href="https://fonts.googleapis.com/css?family=Gaegu" rel="stylesheet">
     
     <!-- BOOTSTRAP 4-->
@@ -44,7 +45,7 @@
             <div class="col-md-6">
 
                 <form class="form-inline" autocomplete="off" id="search" >
-                    <input type="text" class="form-control" id="input" placeholder="I'm looking for a...">
+                    <input type="text" onfocus="this.value=''" class="form-control" id="input" placeholder="I'm looking for a...">
                     <button type="submit" id="submit" class="btn btn-primary">Search</button>
                 </form>
 
@@ -80,6 +81,5 @@
 
 <script type="text/javascript">
     loadBreed();
-
 </script>
 

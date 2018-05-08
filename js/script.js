@@ -75,7 +75,7 @@ function showSubBreed()
 
     var images = "https://dog.ceo/api/breed/" + breed + "/" + subbreed + "/images";
     
-    if (subbreed == "All Sub-Breed")
+    if (subbreed == "All Sub-Breeds")
         images = "https://dog.ceo/api/breed/" + breed + "/images";        
 
     $.getJSON (images, function(data)
