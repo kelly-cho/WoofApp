@@ -29,7 +29,7 @@
 }
 
 
-@media only screen and (min-width: 768px) and (max-width: 1000px)  
+@media only screen and (min-width: 769px) and (max-width: 999px)  
 {
   .title
   {
@@ -43,12 +43,18 @@
 
   .form-inline .form-control
   {
-    width: 75% !important;
-  } 
-  
+    width: 100% !important;
+  }
+
+  .btn-primary
+  {
+    width: 100% !important;
+    margin-top: 3%;
+  }  
+
   .autocomplete-items 
   {
-    width: 67% !important;
+    width: 90% !important;
     margin-left: 5%;
   }
 }
