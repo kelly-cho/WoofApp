@@ -16,19 +16,14 @@ img, embed, object, video
 
 body
 {
-  color: #595959;  
   text-align: center;
   background-color: #f6e2e2 !important;
 }
 
-.title 
+.title, #error 
 {
+  color: #796558 !important;
   font-family: 'Gaegu', cursive;
-}
-
-#logo
-{
-  width: 50%;
 }
 
 .form-control, .form-control option
@@ -53,9 +48,8 @@ body
 .autocomplete-items 
 {
   text-transform: capitalize;
-  position: inherit;
+  position: absolute;
   z-index: 99;
-  width: 82%;
 
   top: 100%;
   left: 0;

@@ -4,6 +4,7 @@ var breedList = [];
 function loadBreed() 
 {
     $("#subbreed-selector").hide();
+    $("#error").hide();
     
     var all_breeds = "https://dog.ceo/api/breeds/list/all";
 
@@ -31,15 +32,20 @@ function showBreed()
     var selected = $("#input").val();
     var images = "https://dog.ceo/api/breed/" + selected + "/images";
 
+    if (breedList.indexOf(selected) == -1)
+        $("#error").show();                  
+    else
+        $("#error").hide();
+
     // masonry gallery
     $.getJSON (images, function(data)
     {
         for (n = 0; n < data.message.length; n ++)
         {
             $("#grid").append("<div class='card'><img class='card-img' src='" + data.message[n] + "'></div>");            
-        }
+        }            
+        
     }); 
-
 
     // check for sub-breed and show filters
     var subs = "https://dog.ceo/api/breed/" + selected + "/list";
