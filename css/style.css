@@ -26,6 +26,11 @@ body
   font-family: 'Gaegu', cursive;
 }
 
+#logo
+{
+  cursor: pointer;
+}
+
 .form-control, .form-control option
 {
   text-transform: capitalize;

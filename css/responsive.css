@@ -25,6 +25,7 @@
   {
     width: 94% !important;
     margin-left: 3%;
+    margin-top: -9%;
   }
 }
 
@@ -56,6 +57,13 @@
   {
     width: 90% !important;
     margin-left: 5%;
+    margin-top: -13%;
+  }
+
+  .col-md-2
+  {
+    flex: 0 0 25% !important;
+    max-width: 25% !important;
   }
 }
 

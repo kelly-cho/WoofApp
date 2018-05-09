@@ -1,4 +1,5 @@
 var breedList = [];
+var subbreedList = [];
 
 /* add breed options to dropdown menu */
 function loadBreed() 
@@ -12,15 +13,26 @@ function loadBreed()
     {
         var breeds = data.message;
 
-        $.each (breeds, function(name, subbreed)
+        $.each (breeds, function (name, subbreed)
         {
             breedList.push(name);
+
+            // if has sub breed
+            if (breeds[name].length != 0) 
+            {
+                for (n = 0; n < breeds[name].length; n ++) 
+                {
+                    breedList.push(breeds[name][n] + ' ' + name);
+                    subbreedList.push(breeds[name][n] + ' ' + name);              
+                }    
+            }
         });
     });    
 
+    breedList.sort();
+
     // set up autocomplete search bar
     autocomplete(document.getElementById("input"), breedList);
-
 };
 
 /* load images of selected breed */
@@ -30,12 +42,27 @@ function showBreed()
     $("#grid").html(""); 
 
     var selected = $("#input").val();
-    var images = "https://dog.ceo/api/breed/" + selected + "/images";
 
+    // if no such breed exists
     if (breedList.indexOf(selected) == -1)
+    {
         $("#error").show();                  
+        return false;
+    }
     else
         $("#error").hide();
+
+    var images = "https://dog.ceo/api/breed/" + selected + "/images";
+
+    // if it is a sub breed
+    if (subbreedList.indexOf(selected) != -1)
+    {
+        var index = selected.indexOf(" ");
+        var breed = selected.substr(index + 1);
+        var subbreed = selected.substr (0, index);
+
+        images = "https://dog.ceo/api/breed/" + breed + "/" + subbreed + "/images";
+    }
 
     // masonry gallery
     $.getJSON (images, function(data)
@@ -44,17 +71,21 @@ function showBreed()
         {
             $("#grid").append("<div class='card'><img class='card-img' src='" + data.message[n] + "'></div>");            
         }            
-        
     }); 
+
+    // if it's a subreed
+    if (subbreedList.indexOf(selected) != -1)
+    {
+        $("#subbreed-selector").hide();
+        return false;
+    }
 
     // check for sub-breed and show filters
     var subs = "https://dog.ceo/api/breed/" + selected + "/list";
 
     $.getJSON (subs, function(data)
     {
-        if (data.message.length == 0)
-            $("#subbreed-selector").hide();
-        else
+        if (data.message.length != 0)
         {
             $("#subbreed-selector").html("");
             $("#subbreed-selector").append("<option>All Sub-Breeds</option>");
@@ -100,12 +131,6 @@ function autocomplete (entered, list)
 
     // when users type in the search bar
     entered.addEventListener("input", function(e) 
-    {
-        addItems(this);
-    });
-
-    // when users click on the search bar
-    entered.addEventListener("click", function(e)
     {
         addItems(this);
     });
@@ -167,6 +192,7 @@ function autocomplete (entered, list)
         {
             entered.value = name;
             closeAllLists();
+            document.getElementById("submit").click();            
         });
     }
 
@@ -252,7 +278,6 @@ function autocomplete (entered, list)
         closeAllLists(e.target);
     });
 }
-
 
 
 $("#search").submit(showBreed);
