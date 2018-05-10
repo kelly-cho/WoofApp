@@ -20,7 +20,7 @@ body
   background-color: #f6e2e2 !important;
 }
 
-.title, #error 
+.title, #error, #loading 
 {
   color: #796558 !important;
   font-family: 'Gaegu', cursive;

@@ -1,5 +1,10 @@
+// lists of breed
 var breedList = [];
 var subbreedList = [];
+
+// to keep track of user inputs
+var selected = "";
+var subbreed = "";
 
 // to keep track of image loading
 var imgCount = 0;
@@ -10,6 +15,7 @@ function loadBreed()
 {
     $("#subbreed-selector").hide();
     $("#error").hide();
+    $("#loading").hide();
     
     var all_breeds = "https://dog.ceo/api/breeds/list/all";
 
@@ -45,16 +51,19 @@ function showBreed()
     $("#grid").hide();
     $("#subbreed-selector").hide();
 
-    var selected = $("#input").val();
+    selected = $("#input").val().toLowerCase();
 
     // if no such breed exists
     if (breedList.indexOf(selected) == -1)
     {
+    	console.log("hi " + selected);
         $("#error").show();                  
         return false;
     }
     else
         $("#error").hide();
+
+    $("#loading").show();
 
     var images = "https://dog.ceo/api/breed/" + selected + "/images";
 
@@ -63,9 +72,9 @@ function showBreed()
     {
         var index = selected.indexOf(" ");
         var breed = selected.substr(index + 1);
-        var subbreed = selected.substr (0, index);
+        var sub = selected.substr (0, index);
 
-        images = "https://dog.ceo/api/breed/" + breed + "/" + subbreed + "/images";
+        images = "https://dog.ceo/api/breed/" + breed + "/" + sub + "/images";
     }
 
     // masonry gallery
@@ -111,14 +120,15 @@ function showSubBreed()
     // clear grid
     $("#grid").html(""); 
     $("#grid").hide();
-
-    var breed    = $("#input").val(); 
-    var subbreed = $("#subbreed-selector").val();
-
-    var images = "https://dog.ceo/api/breed/" + breed + "/" + subbreed + "/images";
+    $("#loading").show();
+    
+    subbreed = $("#subbreed-selector").val().toLowerCase();
+	document.getElementById("input").value = selected;
+    
+    var images = "https://dog.ceo/api/breed/" + selected + "/" + subbreed + "/images";
     
     if (subbreed == "All Sub-Breeds")
-        images = "https://dog.ceo/api/breed/" + breed + "/images";        
+        images = "https://dog.ceo/api/breed/" + selected + "/images";        
 
     $.getJSON (images, function(data)
     {
@@ -146,6 +156,7 @@ function onImageLoad(item, url)
 
         if (loadCount == imgCount)
         {
+            $("#loading").hide();
             $("#grid").show();                 
             imgCount = 0;
             loadCount = 0;
