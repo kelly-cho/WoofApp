@@ -1,6 +1,10 @@
 var breedList = [];
 var subbreedList = [];
 
+// to keep track of image loading
+var imgCount = 0;
+var loadCount = 0;
+
 /* add breed options to dropdown menu */
 function loadBreed() 
 {
@@ -29,8 +33,6 @@ function loadBreed()
         });
     });    
 
-    breedList.sort();
-
     // set up autocomplete search bar
     autocomplete(document.getElementById("input"), breedList);
 };
@@ -40,6 +42,8 @@ function showBreed()
 {
     // clear grid
     $("#grid").html(""); 
+    $("#grid").hide();
+    $("#subbreed-selector").hide();
 
     var selected = $("#input").val();
 
@@ -69,14 +73,14 @@ function showBreed()
     {
         for (n = 0; n < data.message.length; n ++)
         {
-            $("#grid").append("<div class='card'><img class='card-img' src='" + data.message[n] + "'></div>");            
+            imgCount++;
+            onImageLoad(new Image(), data.message[n]);         
         }            
     }); 
 
     // if it's a subreed
     if (subbreedList.indexOf(selected) != -1)
     {
-        $("#subbreed-selector").hide();
         return false;
     }
 
@@ -106,6 +110,7 @@ function showSubBreed()
 {
     // clear grid
     $("#grid").html(""); 
+    $("#grid").hide();
 
     var breed    = $("#input").val(); 
     var subbreed = $("#subbreed-selector").val();
@@ -119,10 +124,37 @@ function showSubBreed()
     {
         for (n = 0; n < data.message.length; n ++)
         {
-            $("#grid").append("<div class='card'><img class='card-img' src='" + data.message[n] + "'></div>");            
+            imgCount++;
+            onImageLoad(new Image(), data.message[n]);            
         }
     }); 
 };
+
+/* hide grid until all images loaded */
+function onImageLoad(item, url)
+{
+    item.onload = function() 
+    {
+        // masonry gallery
+        var node = document.createElement("div");
+        node.className = "card";
+
+        node.append(item);  
+        $("#grid").append(node);
+
+        loadCount++;
+
+        if (loadCount == imgCount)
+        {
+            $("#grid").show();                 
+            imgCount = 0;
+            loadCount = 0;
+        }
+    };
+
+    item.src = url;
+    item.className = "card-img";
+}
 
 /* autocomplete search dropdown menu */
 function autocomplete (entered, list) 

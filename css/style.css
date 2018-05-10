@@ -53,6 +53,7 @@ body
 .autocomplete-items 
 {
   text-transform: capitalize;
+  background-color: white;
   position: absolute;
   z-index: 99;
 
