@@ -9,6 +9,7 @@ var subbreed = "";
 // to keep track of image loading
 var imgCount = 0;
 var loadCount = 0;
+var gallery = [];
 
 /* add breed options to dropdown menu */
 function loadBreed() 
@@ -50,6 +51,7 @@ function showBreed()
     $("#grid").html(""); 
     $("#grid").hide();
     $("#subbreed-selector").hide();
+    gallery = [];
 
     selected = $("#input").val().toLowerCase();
 
@@ -121,7 +123,8 @@ function showSubBreed()
     $("#grid").html(""); 
     $("#grid").hide();
     $("#loading").show();
-    
+    gallery = [];
+
     subbreed = $("#subbreed-selector").val();
 	document.getElementById("input").value = selected;
     
@@ -140,9 +143,15 @@ function showSubBreed()
     }); 
 };
 
+
 /* hide grid until all images loaded */
 function onImageLoad(item, url)
 {
+    if(gallery.indexOf(url) != -1)
+        return;
+
+    gallery.push(url);
+
     item.onload = function() 
     {
         // masonry gallery
@@ -150,6 +159,7 @@ function onImageLoad(item, url)
         node.className = "card";
 
         node.append(item);  
+        
         $("#grid").append(node);
 
         loadCount++;
