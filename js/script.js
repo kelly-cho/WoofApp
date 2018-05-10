@@ -51,14 +51,16 @@ function showBreed()
     $("#grid").html(""); 
     $("#grid").hide();
     $("#subbreed-selector").hide();
+    
     gallery = [];
-
+    imgCount = 0;
+    loadCount = 0;
+    
     selected = $("#input").val().toLowerCase();
 
     // if no such breed exists
     if (breedList.indexOf(selected) == -1)
     {
-    	console.log("hi " + selected);
         $("#error").show();                  
         return false;
     }
@@ -88,6 +90,14 @@ function showBreed()
            	onImageLoad(new Image(), data.message[n]); 
         }            
     }); 
+
+    setTimeout(function () 
+    {
+        if (loadCount != imgCount) 
+        {
+            $("#grid").show();            
+        }
+    }, 8000);
 
     // if it's a subreed
     if (subbreedList.indexOf(selected) != -1)
@@ -123,8 +133,11 @@ function showSubBreed()
     $("#grid").html(""); 
     $("#grid").hide();
     $("#loading").show();
+    
     gallery = [];
-
+    imgCount = 0;
+    loadCount = 0;
+    
     subbreed = $("#subbreed-selector").val();
 	document.getElementById("input").value = selected;
     
@@ -141,6 +154,14 @@ function showSubBreed()
            	onImageLoad(new Image(), data.message[n]); 
         }
     }); 
+
+    setTimeout(function () 
+    {
+        if (loadCount != imgCount) 
+        {
+            $("#grid").show();            
+        }
+    }, 8000);
 };
 
 
