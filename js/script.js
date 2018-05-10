@@ -95,6 +95,7 @@ function showBreed()
     {
         if (loadCount != imgCount) 
         {
+            $("#loading").hide();
             $("#grid").show();            
         }
     }, 8000);
@@ -159,6 +160,7 @@ function showSubBreed()
     {
         if (loadCount != imgCount) 
         {
+            $("#loading").hide();
             $("#grid").show();            
         }
     }, 8000);
