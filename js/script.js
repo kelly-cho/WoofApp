@@ -51,6 +51,8 @@ function showBreed()
     $("#grid").hide();
     $("#subbreed-selector").hide();
 
+    var gallery = [];
+
     selected = $("#input").val().toLowerCase();
 
     // if no such breed exists
@@ -81,9 +83,13 @@ function showBreed()
     $.getJSON (images, function(data)
     {
         for (n = 0; n < data.message.length; n ++)
-        {
-            imgCount++;
-            onImageLoad(new Image(), data.message[n]);         
+        {        
+            if(gallery.indexOf(data.message[n]) == -1)
+            {	
+            	imgCount++;
+            	onImageLoad(new Image(), data.message[n]); 
+            	gallery.push(data.message[n]);
+            }        
         }            
     }); 
 
@@ -122,20 +128,26 @@ function showSubBreed()
     $("#grid").hide();
     $("#loading").show();
     
-    subbreed = $("#subbreed-selector").val().toLowerCase();
+    gallery = [];
+
+    subbreed = $("#subbreed-selector").val();
 	document.getElementById("input").value = selected;
     
-    var images = "https://dog.ceo/api/breed/" + selected + "/" + subbreed + "/images";
-    
     if (subbreed == "All Sub-Breeds")
-        images = "https://dog.ceo/api/breed/" + selected + "/images";        
+        images = "https://dog.ceo/api/breed/" + selected + "/images";
+    else
+        images = "https://dog.ceo/api/breed/" + selected + "/" + subbreed + "/images";    
 
     $.getJSON (images, function(data)
     {
         for (n = 0; n < data.message.length; n ++)
         {
-            imgCount++;
-            onImageLoad(new Image(), data.message[n]);            
+            if(gallery.indexOf(data.message[n]) == -1)
+            {	
+            	imgCount++;
+            	onImageLoad(new Image(), data.message[n]); 
+            	gallery.push(data.message[n]);
+            }           
         }
     }); 
 };
