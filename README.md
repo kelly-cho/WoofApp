@@ -9,6 +9,3 @@ A simple web app that allows users to browse images of dogs by breed.
 
 ### Resources
 - [Dog API](https://dog.ceo/dog-api/)
-
-### Link
-- Check it out [here](https://www.studiocho.com/woof)
