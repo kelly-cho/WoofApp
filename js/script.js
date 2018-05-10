@@ -51,8 +51,6 @@ function showBreed()
     $("#grid").hide();
     $("#subbreed-selector").hide();
 
-    var gallery = [];
-
     selected = $("#input").val().toLowerCase();
 
     // if no such breed exists
@@ -84,12 +82,8 @@ function showBreed()
     {
         for (n = 0; n < data.message.length; n ++)
         {        
-            if(gallery.indexOf(data.message[n]) == -1)
-            {	
-            	imgCount++;
-            	onImageLoad(new Image(), data.message[n]); 
-            	gallery.push(data.message[n]);
-            }        
+          	imgCount++;
+           	onImageLoad(new Image(), data.message[n]); 
         }            
     }); 
 
@@ -128,8 +122,6 @@ function showSubBreed()
     $("#grid").hide();
     $("#loading").show();
     
-    gallery = [];
-
     subbreed = $("#subbreed-selector").val();
 	document.getElementById("input").value = selected;
     
@@ -142,12 +134,8 @@ function showSubBreed()
     {
         for (n = 0; n < data.message.length; n ++)
         {
-            if(gallery.indexOf(data.message[n]) == -1)
-            {	
-            	imgCount++;
-            	onImageLoad(new Image(), data.message[n]); 
-            	gallery.push(data.message[n]);
-            }           
+           	imgCount++;
+           	onImageLoad(new Image(), data.message[n]); 
         }
     }); 
 };
